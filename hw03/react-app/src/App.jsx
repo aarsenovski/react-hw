@@ -1,4 +1,14 @@
+import { useState } from "react";
+import MoodDisplay from "./components/MoodDisplay";
+import MoodSelector from "./components/MoodSelector";
 import Parent from "./components/Parent";
+
+const moodEmojiMap = {
+  Happy: "😊",
+  Sad: "😢",
+  Excited: "🤩",
+  Tired: "😴",
+};
 
 const App = () => {
   const family = {
@@ -19,12 +29,22 @@ const App = () => {
       },
     ],
   };
+  const [currentMood, setCurrentMood] = useState("");
 
   return (
-    <div>
-      <h1>Family Tree</h1>
-      <Parent family={family} />
-    </div>
+    <>
+      <div>
+        <h1>Family Tree</h1>
+        <Parent family={family} />
+      </div>
+      <div>
+        <div>
+          <h1>Mood Tracker</h1>
+          <MoodSelector setCurrentMood={setCurrentMood} />
+          <MoodDisplay mood={currentMood} emojiMap={moodEmojiMap} />
+        </div>
+      </div>
+    </>
   );
 };
 
